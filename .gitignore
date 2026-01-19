@@ -1,0 +1,55 @@
+## Frontend
+
+# dependencies
+**/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+client/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+client/.env.local
+client/.env.development
+client/.env.production
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+## Backend
+**/dist
+server/.env
+
+# DynamoDB
+dynamodb-local-metadata.json
+*/dynamodb-local-metadata.json
+shared-local-instance.db
+server/shared-local-instance.db
+
+Thumbs.db
