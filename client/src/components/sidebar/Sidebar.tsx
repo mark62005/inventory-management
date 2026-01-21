@@ -1,3 +1,5 @@
+import { type SidebarNavLink } from "./SidebarLink";
+
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
 	selectIsSidebarCollapsed,
@@ -5,7 +7,49 @@ import {
 } from "@/features/ui/ui.slice";
 import { cn } from "@/lib/utils";
 
-import { MenuIcon } from "lucide-react";
+import {
+	ArchiveIcon,
+	CircleDollarSignIcon,
+	ClipboardIcon,
+	LayoutIcon,
+	MenuIcon,
+	SlidersHorizontalIcon,
+	UserIcon,
+} from "lucide-react";
+import SidebarLink from "./SidebarLink";
+
+const SIDEBAR_LINKS_CONFIG: SidebarNavLink[] = [
+	{
+		href: "/dashboard",
+		Icon: LayoutIcon,
+		label: "Dashboard",
+	},
+	{
+		href: "/inventory",
+		Icon: ArchiveIcon,
+		label: "Inventory",
+	},
+	{
+		href: "/products",
+		Icon: ClipboardIcon,
+		label: "Products",
+	},
+	{
+		href: "/users",
+		Icon: UserIcon,
+		label: "Users",
+	},
+	{
+		href: "/settings",
+		Icon: SlidersHorizontalIcon,
+		label: "Settings",
+	},
+	{
+		href: "/expenses",
+		Icon: CircleDollarSignIcon,
+		label: "Expenses",
+	},
+] as const;
 
 function Sidebar() {
 	const dispatch = useAppDispatch();
@@ -48,7 +92,15 @@ function Sidebar() {
 				</button>
 			</div>
 
-			<div className="flex-1 mt-8">{/* TODO: SIDEBAR LINKS */}</div>
+			<div className="flex-1 mt-8">
+				{SIDEBAR_LINKS_CONFIG.map((link) => (
+					<SidebarLink
+						key={link.href}
+						link={link}
+						isCollapsed={isSidebarCollapsed}
+					/>
+				))}
+			</div>
 
 			{/* FOOTER */}
 			<div className={cn("mb-10", isSidebarCollapsed ? "hidden" : "block")}>
