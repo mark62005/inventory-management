@@ -1,0 +1,121 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id
+  name      String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email])
+}
+
+model Product {
+  id            String @id @default(cuid())
+  name          String
+  price         Float
+  rating        Float?
+  stockQuantity Int[]
+
+  sales     Sale[]
+  purchases Purchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sale {
+  id         String   @id @default(cuid())
+  quantity   Int
+  unitPrice  Float
+  totalValue Float
+  timestamp  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Purchase {
+  id        String   @id @default(cuid())
+  quantity  Int
+  unitCost  Float
+  totalCost Float
+  timestamp DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+enum ExpenseCategory {
+  Office
+  Salaries
+  Professional
+}
+
+model Expense {
+  id        String          @id @default(cuid())
+  category  ExpenseCategory
+  amount    Float
+  timestamp DateTime
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model SalesSummary {
+  id               String   @id @default(cuid())
+  totalValue       Float
+  changePercentage Float?
+  date             DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model PurchaseSummary {
+  id               String   @id @default(cuid())
+  totalPurchased   Float
+  changePercentage Float?
+  date             DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model ExpenseSummary {
+  id               String   @id @default(cuid())
+  totalExpenses    Float
+  changePercentage Float?
+  date             DateTime
+
+  expensesByCategory ExpenseByCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ExpenseByCategory {
+  id        String          @id @default(cuid())
+  category  ExpenseCategory
+  amount    BigInt
+  date      DateTime
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  expenseSummaryId String
+  expenseSummary   ExpenseSummary @relation(fields: [expenseSummaryId], references: [id])
+}

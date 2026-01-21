@@ -45,6 +45,7 @@ next-env.d.ts
 ## Backend
 **/dist
 server/.env
+server/prisma/generated*
 
 # DynamoDB
 dynamodb-local-metadata.json
