@@ -1,12 +1,28 @@
 "use client";
 
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+	selectIsDarkMode,
+	selectIsSidebarCollapsed,
+	setIsDarkMode,
+	setIsSidebarCollapsed,
+} from "@/features/ui/ui.slice";
+
 import Link from "next/link";
 import { BellIcon, MenuIcon, SettingsIcon, SunIcon } from "lucide-react";
 
 function Navbar() {
-	function toggleSidebar() {}
+	const dispatch = useAppDispatch();
+	const isDarkMode = useAppSelector(selectIsDarkMode);
+	const isSidebarCollapsed = useAppSelector(selectIsSidebarCollapsed);
 
-	function toggleDarkMode() {}
+	function toggleSidebar() {
+		dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+	}
+
+	function toggleDarkMode() {
+		dispatch(setIsDarkMode(!isDarkMode));
+	}
 
 	return (
 		<div className="flex justify-between items-center w-full mb-7">

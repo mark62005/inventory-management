@@ -2,14 +2,28 @@
 
 import { type WithChildrenProps } from "@/types/react";
 
+import { useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useAppSelector } from "@/store/hooks";
+import {
+	selectIsDarkMode,
+	selectIsSidebarCollapsed,
+} from "@/features/ui/ui.slice";
 
 import Sidebar from "@/components/sidebar/Sidebar";
 import Navbar from "@/components/nav-bar/Navbar";
 
 function DashboardLayout({ children }: WithChildrenProps) {
-	const isDarkMode = false; // TODO: Change light and dark theme functionality
-	const isSidebarCollapsed = false; // TODO: Check if sidebar is collapsed
+	const isDarkMode = useAppSelector(selectIsDarkMode);
+	const isSidebarCollapsed = useAppSelector(selectIsSidebarCollapsed);
+
+	useEffect(() => {
+		if (isDarkMode) {
+			document.documentElement.classList.add("theme-dark");
+		} else {
+			document.documentElement.classList.add("theme-white");
+		}
+	});
 
 	return (
 		<div

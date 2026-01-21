@@ -1,15 +1,24 @@
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+	selectIsSidebarCollapsed,
+	setIsSidebarCollapsed,
+} from "@/features/ui/ui.slice";
 import { cn } from "@/lib/utils";
+
 import { MenuIcon } from "lucide-react";
 
 function Sidebar() {
-	const isSidebarCollapsed = false;
+	const dispatch = useAppDispatch();
+	const isSidebarCollapsed = useAppSelector(selectIsSidebarCollapsed);
 
-	function toggleSidebar() {}
+	function toggleSidebar() {
+		dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+	}
 
 	return (
 		<div
 			className={cn(
-				"fixed flex flex-col bg-background transition-all duration-300 overflow-hidden h-full shadow-md z-40",
+				"fixed flex flex-col bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40",
 				isSidebarCollapsed ? "w-0 md:w-16" : "w-72 md:w-64",
 			)}
 		>
