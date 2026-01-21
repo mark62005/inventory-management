@@ -3,6 +3,8 @@ import { type WithChildrenProps } from "@/types/react";
 
 import { Geist, Geist_Mono } from "next/font/google";
 
+import AppProviders from "./AppProviders";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,7 +28,7 @@ export default function RootLayout({ children }: WithChildrenProps) {
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
 			>
-				{children}
+				<AppProviders>{children}</AppProviders>
 			</body>
 		</html>
 	);
