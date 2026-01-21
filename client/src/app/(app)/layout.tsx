@@ -1,13 +1,13 @@
 "use client";
 
-import { type GeneralLayoutProps } from "@/types/app/layout-props/GeneralLayoutProps";
+import { type WithChildrenProps } from "@/types/react";
 
 import { cn } from "@/lib/utils";
 
 import Sidebar from "@/components/sidebar/Sidebar";
 import Navbar from "@/components/nav-bar/Navbar";
 
-function DashboardLayout({ children }: GeneralLayoutProps) {
+function DashboardLayout({ children }: WithChildrenProps) {
 	const isDarkMode = false; // TODO: Change light and dark theme functionality
 	const isSidebarCollapsed = false; // TODO: Check if sidebar is collapsed
 
