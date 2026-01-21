@@ -9,8 +9,8 @@ interface UiState {
 }
 
 const initialState: UiState = {
-	isDarkMode: true,
-	isSidebarCollapsed: true,
+	isDarkMode: false,
+	isSidebarCollapsed: false,
 };
 
 export const uiSlice = createSlice({
