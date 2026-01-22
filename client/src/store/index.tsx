@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./rootReducer";
+import { baseApi } from "./api";
 
 /* REDUX STORE */
 export function makeStore() {
 	return configureStore({
 		reducer: rootReducer,
 		middleware(getDefaultMiddleware) {
-			return getDefaultMiddleware();
-			// .concat(api.middleware),}
+			return getDefaultMiddleware().concat(baseApi.middleware);
 		},
 	});
 }
