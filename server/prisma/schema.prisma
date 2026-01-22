@@ -18,7 +18,7 @@ model User {
   name      String
   email     String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([email])
 }
@@ -28,13 +28,13 @@ model Product {
   name          String
   price         Float
   rating        Float?
-  stockQuantity Int[]
+  stockQuantity Int
 
   sales     Sale[]
   purchases Purchase[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Sale {
@@ -44,7 +44,7 @@ model Sale {
   totalValue Float
   timestamp  DateTime
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt  DateTime @default(now()) @updatedAt
 
   productId String
   product   Product @relation(fields: [productId], references: [id])
@@ -57,7 +57,7 @@ model Purchase {
   totalCost Float
   timestamp DateTime
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   productId String
   product   Product @relation(fields: [productId], references: [id])
@@ -75,7 +75,7 @@ model Expense {
   amount    Float
   timestamp DateTime
   createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  updatedAt DateTime        @default(now()) @updatedAt
 }
 
 model SalesSummary {
@@ -84,7 +84,7 @@ model SalesSummary {
   changePercentage Float?
   date             DateTime
   createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  updatedAt        DateTime @default(now()) @updatedAt
 }
 
 model PurchaseSummary {
@@ -93,7 +93,7 @@ model PurchaseSummary {
   changePercentage Float?
   date             DateTime
   createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  updatedAt        DateTime @default(now()) @updatedAt
 }
 
 model ExpenseSummary {
@@ -105,7 +105,7 @@ model ExpenseSummary {
   expensesByCategory ExpenseByCategory[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model ExpenseByCategory {
@@ -114,7 +114,7 @@ model ExpenseByCategory {
   amount    BigInt
   date      DateTime
   createdAt DateTime        @default(now())
-  updatedAt DateTime        @updatedAt
+  updatedAt DateTime        @default(now()) @updatedAt
 
   expenseSummaryId String
   expenseSummary   ExpenseSummary @relation(fields: [expenseSummaryId], references: [id])
