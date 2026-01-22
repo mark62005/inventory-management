@@ -4,9 +4,9 @@
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "rimraf dist && tsc",
+		"build": "rimraf dist && npx tsc",
 		"start": "node dist/index.js",
-		"dev": "concurrently \"tsc -w --noEmit\" \"nodemon --exec ts-node src/index.ts\"",
+		"dev": "concurrently \"npx tsc -w\" \"nodemon --exec ts-node src/index.ts --clear-cache\"",
 		"prisma:generate": "prisma generate",
 		"prisma:migrate": "prisma migrate dev",
 		"prisma:studio": "prisma studio"
